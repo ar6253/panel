@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minecraft Form</title>
+  <link rel="icon" type="image/png" href="https://static.wikia.nocookie.net/minecraft_gamepedia/images/1/10/Grass_Block_JE3_BE3.png">
+  <style>
+    body {
+      font-family: sans-serif;
+      background: linear-gradient(120deg, #3fa34d, #2b9348);
+      color: white;
+      text-align: center;
+      padding: 60px;
+    }
+    .box {
+      background: rgba(0,0,0,0.4);
+      padding: 20px;
+      border-radius: 20px;
+      display: inline-block;
+    }
+    input, select {
+      padding: 8px;
+      margin: 6px;
+      border-radius: 6px;
+      border: none;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      background: #fff;
+      color: #2b9348;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #e6ffe6;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>ورود به تغییرات پروفایل ماینکرفت</h1>
+    <p>برای وارد کردن آپارات یوزرنیم، وارد آپارات خود شوید و نام کانال خود را وارد نمایید.</p>
+    
+    <form>
+      <label>آپارات یوزرنیم*: </label>
+      <input type="text" placeholder="مثلاً AMIR_9" required><br>
+      <button type="button" onclick="login()">ورود</button>
+    </form>
+  </div>
+
+  <script>
+    function login() {
+      const username = document.querySelector('input').value.trim();
+      if (username === 'AMIR_9') {
+        document.body.innerHTML = `
+          <div class="box">
+            <h2>پروفایل ${username}</h2>
+            <p>شماره همراه: 09369330357</p>
+            <p>نام: امیر سلامی</p>
+            <p>ادیشن: بدراک</p>
+            <p>نسخه: 1.21.100</p>
+          </div>
+        `;
+      } else {
+        alert('یوزرنیم در سیستم ثبت نشده است!');
+      }
+    }
+  </script>
+</body>
+</html>
