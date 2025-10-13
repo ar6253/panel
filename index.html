@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ورود به پنل</title>
 <style>
-  *{box-sizing:border-box;margin:0;padding:0;font-family:Vazirmatn, sans-serif}
+  *{box-sizing:border-box;margin:0;padding:0;font-family:Vazirmatn,sans-serif}
   html,body{height:100%}
   body{display:flex;align-items:center;justify-content:center;background:#f2f2f2;padding:20px}
   .card{width:100%;max-width:420px;background:#fff;padding:30px;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,0.08);text-align:center}
@@ -13,17 +13,14 @@
   input{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;font-size:1rem;margin-bottom:12px;text-align:center}
   button{width:100%;padding:12px;border-radius:10px;border:none;background:#1976d2;color:#fff;font-size:1rem;cursor:pointer}
   button:active{transform:translateY(1px)}
-  .hint{margin-top:10px;color:#666;font-size:0.95rem}
-  @media (max-width:480px){ .card{padding:20px} h1{font-size:1.2rem} }
 </style>
 </head>
 <body>
 
-<div class="card" id="loginCard">
+<div class="card">
   <h1>ورود به پنل</h1>
   <input id="username" type="text" placeholder="نام کاربری را وارد کنید" autocomplete="off" />
   <button id="enterBtn">ورود</button>
-  <div class="hint">برای ورود یکی از نام‌های: AMIR 9 ، its_peyrov ، Dmemz ، Alireza</div>
 </div>
 
 <script>
@@ -31,29 +28,23 @@
     const input = document.getElementById('username');
     const btn = document.getElementById('enterBtn');
 
-    // نگاشت نام ورودی (حساس به حروف کوچک/بزرگ نیست)
-    const map = {
-      "amir 9": "AMIR 9",
-      "its_peyrov": "its_peyrov",
-      "dmemz": "dmemz",
-      "alireza": "example_player"
+    // نگاشت نام کاربری به لینک پروفایل اختصاصی
+    const userLinks = {
+      "AMIR 9": "https://ar6253.github.io/panel/profile.html?user=AMIR%209",
+      "its_peyrov": "https://ar6253.github.io/panel/profile.html?user=its_peyrov",
+      "Dmemz": "https://ar6253.github.io/panel/profile.html?user=dmemz",
+      "Alireza": "https://ar6253.github.io/panel/profile.html?user=example_player"
     };
-
-    function goToProfile(userParam) {
-      // آدرس صفحه تغییرات پروفایل — اگر خواستی اسم فایل یا پارامتر را عوض کن
-      const base = "profile.html";
-      const url = base + "?user=" + encodeURIComponent(userParam) + "&edit=1";
-      // ریدایرکت واقعی به URL
-      window.location.href = url;
-    }
 
     function handleLogin() {
       const raw = input.value.trim();
-      if (!raw) { alert("لطفاً نام کاربری وارد کنید."); input.focus(); return; }
+      if(!raw){ alert("لطفاً نام کاربری وارد کنید."); input.focus(); return; }
 
-      const key = raw.toLowerCase();
-      if (map.hasOwnProperty(key)) {
-        goToProfile(map[key]);
+      // بررسی بدون حساسیت به حروف کوچک/بزرگ
+      const matchedKey = Object.keys(userLinks).find(k => k.toLowerCase() === raw.toLowerCase());
+
+      if(matchedKey){
+        window.location.href = userLinks[matchedKey]; // ریدایرکت به لینک اختصاصی
       } else {
         alert("نام کاربری یافت نشد!");
         input.select();
@@ -61,14 +52,7 @@
     }
 
     btn.addEventListener('click', handleLogin);
-
-    // ورود با کلید Enter
-    input.addEventListener('keydown', function(e){
-      if (e.key === "Enter") handleLogin();
-    });
-
-    // اگر خواستی، میشه خودکار نام‌های کوچک/بدون فاصله هم پذیرفت:
-    // مثلاً "amir9" هم به "AMIR 9" بره — می‌تونم اضافه کنم اگر خواستی.
+    input.addEventListener('keydown', e => { if(e.key === "Enter") handleLogin(); });
   })();
 </script>
 
