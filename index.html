@@ -68,13 +68,14 @@ button:hover { background:#1a6ad1; }
     <input type="text" id="phone">
 
     <label>ادیشن</label>
-    <select id="edition" onchange="updateVersion()">
+    <select id="edition">
       <option value="Java">Java</option>
       <option value="Bedrock">Bedrock</option>
     </select>
 
     <label>نسخه</label>
-    <input type="text" id="version">
+    <input type="text" id="version" placeholder="مثلاً: 1.21.100">
+
     <button onclick="saveProfile()">ذخیره تغییرات</button>
   </div>
 </div>
@@ -91,6 +92,7 @@ function login() {
 
   document.getElementById("profileForm").style.display = "block";
 
+  // مقادیر پیش‌فرض بر اساس کاربر
   if(username === "AMIR 9") {
     document.getElementById("name").value = "امیر سلامی";
     document.getElementById("phone").value = "09369330357";
@@ -105,18 +107,7 @@ function login() {
     document.getElementById("name").value = "";
     document.getElementById("phone").value = "";
     document.getElementById("edition").value = "Java";
-    document.getElementById("version").value = "1.21.8";
-  }
-}
-
-function updateVersion() {
-  const edition = document.getElementById("edition").value;
-  const versionInput = document.getElementById("version");
-
-  if (edition === "Bedrock") {
-    versionInput.value = "1.21.100";
-  } else if (edition === "Java") {
-    versionInput.value = "1.21.8";
+    document.getElementById("version").value = "";
   }
 }
 
@@ -126,3 +117,4 @@ function saveProfile() {
 </script>
 </body>
 </html>
+
