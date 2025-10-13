@@ -5,19 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ورود به پنل</title>
 <style>
-  *{box-sizing:border-box;margin:0;padding:0;font-family:Vazirmatn,sans-serif}
-  html,body{height:100%}
-  body{display:flex;align-items:center;justify-content:center;background:#f2f2f2;padding:20px}
-  .card{width:100%;max-width:420px;background:#fff;padding:30px;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,0.08);text-align:center}
-  h1{margin-bottom:18px;font-size:1.4rem;color:#222}
-  input{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;font-size:1rem;margin-bottom:12px;text-align:center}
-  button{width:100%;padding:12px;border-radius:10px;border:none;background:#1976d2;color:#fff;font-size:1rem;cursor:pointer}
-  button:active{transform:translateY(1px)}
+  *{box-sizing:border-box;margin:0;padding:0;font-family:Vazirmatn,sans-serif;}
+  html,body{height:100%;}
+  body{display:flex;justify-content:center;align-items:center;background:#ffffff;padding:20px;}
+  .panel{width:100%;max-width:420px;background:#fff;padding:30px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.08);text-align:center;}
+  h1{margin-bottom:18px;font-size:1.5rem;color:#222;}
+  input{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;font-size:1rem;margin-bottom:12px;text-align:center;}
+  button{width:100%;padding:12px;border-radius:10px;border:none;background:#1976d2;color:#fff;font-size:1rem;cursor:pointer;}
+  button:active{transform:translateY(1px);}
 </style>
 </head>
 <body>
 
-<div class="card">
+<div class="panel">
   <h1>ورود به پنل</h1>
   <input id="username" type="text" placeholder="نام کاربری را وارد کنید" autocomplete="off" />
   <button id="enterBtn">ورود</button>
@@ -28,19 +28,17 @@
     const input = document.getElementById('username');
     const btn = document.getElementById('enterBtn');
 
-    // نگاشت نام کاربری به لینک پروفایل اختصاصی
     const userLinks = {
-      "AMIR 9": "https://ar6253.github.io/panel/profile.html?user=AMIR%209",
-      "its_peyrov": "https://ar6253.github.io/panel/profile.html?user=its_peyrov",
-      "Dmemz": "https://ar6253.github.io/panel/profile.html?user=dmemz",
-      "Alireza": "https://ar6253.github.io/panel/profile.html?user=example_player"
+      "AMIR 9": "profile.html?user=AMIR%209",
+      "its_peyrov": "profile.html?user=its_peyrov",
+      "Dmemz": "profile.html?user=dmemz",
+      "Alireza": "profile.html?user=example_player"
     };
 
     function handleLogin() {
       const raw = input.value.trim();
       if(!raw){ alert("لطفاً نام کاربری وارد کنید."); input.focus(); return; }
 
-      // بررسی بدون حساسیت به حروف کوچک/بزرگ
       const matchedKey = Object.keys(userLinks).find(k => k.toLowerCase() === raw.toLowerCase());
 
       if(matchedKey){
