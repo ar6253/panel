@@ -1,99 +1,86 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-  <meta charset="UTF-8"> 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <title>ورود به پروفایل</title> 
-  <link rel="icon" type="image/png" href="https://www.minecraft.net/etc.clientlibs/minecraft/clientlibs/main/resources/favicon.ico"> 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>پنل کاربری</title>
+<style>
+  /* ریست اولیه */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Vazirmatn, sans-serif;
+  }
 
-  <style>
-    /* 🔹 فونت وزیرمتن آفلاین از فایل TTF */
-    @font-face {
-      font-family: 'Vazirmatn';
-      src: url('./fonts/Vazirmatn-Black.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
+  body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f2f2f2;
+  }
+
+  .panel {
+    background: #fff;
+    padding: 30px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+  }
+
+  .panel h1 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 1.5rem;
+  }
+
+  .panel input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+
+  .panel button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .panel button:hover {
+    background-color: #45a049;
+  }
+
+  @media (max-width: 480px) {
+    .panel {
+      padding: 20px 15px;
     }
 
-    body {
-      font-family: 'Vazirmatn', sans-serif;
-      background: #0b0f16;
-      color: #fff;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .panel h1 {
+      font-size: 1.3rem;
     }
-
-    .card {
-      background: rgba(0,0,0,0.7);
-      padding: 20px;
-      border-radius: 12px;
-      width: 350px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-      text-align: center;
-    }
-
-    input { 
-      width: 100%; 
-      padding: 8px; 
-      margin-top: 10px;
-      border-radius: 6px;
-      border: 1px solid #2b8cff;
-      background: #071a2a;
-      color: #e6f3ff;
-      font-family: 'Vazirmatn', sans-serif;
-    }
-
-    button {
-      margin-top: 12px;
-      width: 100%;
-      padding: 10px;
-      background: #2b8cff;
-      border: none;
-      border-radius: 8px;
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-      font-family: 'Vazirmatn', sans-serif;
-    }
-
-    button:hover {
-      background: #1a6ad1;
-    }
-
-    .note { 
-      font-size: 13px; 
-      color: #bad4f0aa;
-      margin-bottom: 8px;
-    }
-  </style>
+  }
+</style>
 </head>
-
 <body>
-  <div class="card">
-    <h2>ورود به پروفایل</h2>
-    <div class="note">برای وارد کردن آپارات یوزرنیم، نام کانال خود را بنویسید.</div>
 
-    <input type="text" id="username" placeholder="مثال: example_player">
-    <button onclick="login()">ورود</button>
-  </div>
+<div class="panel">
+  <h1>ورود به پنل</h1>
+  <input type="text" placeholder="نام کاربری">
+  <input type="password" placeholder="رمز عبور">
+  <button>ورود</button>
+</div>
 
-  <script>
-    const allowedUsers = ["example_player","AMIR 9","its_peyrov","dmemz","horam_2016"];
-
-    function login() {
-      const username = document.getElementById("username").value.trim();
-
-      if (!allowedUsers.includes(username)) {
-        alert("این یوزرنیم مجاز نیست!");
-        return;
-      }
-
-      // باز کردن صفحه‌ی جدید با یوزرنیم در URL
-      window.open(`profile.html?user=${encodeURIComponent(username)}`, "_blank");
-    }
-  </script>
 </body>
 </html>
-
