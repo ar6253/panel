@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>پروفایل</title>
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; font-family:Vazirmatn, sans-serif; }
+  * { margin:0; padding:0; box-sizing:border-box; font-family: Vazirmatn, sans-serif; }
   html, body { height:100%; }
   body {
     display:flex;
@@ -23,16 +23,28 @@
     box-shadow:0 6px 20px rgba(0,0,0,0.08);
     text-align:center;
   }
-  h1 {
-    margin-bottom:20px;
-    font-size:1.5rem;
-    color:#222;
+  h1 { margin-bottom:20px; font-size:1.5rem; color:#222; }
+  label { display:block; text-align:right; margin-top:15px; font-size:1rem; color:#333; }
+  input, select {
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:1rem;
   }
-  p {
-    font-size:1.1rem;
-    color:#555;
-    word-wrap: break-word;
+  button {
+    margin-top:20px;
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#1976d2;
+    color:white;
+    font-size:1rem;
+    cursor:pointer;
   }
+  button:active{ transform:translateY(1px); }
   @media(max-width:480px){
     .panel{padding:20px;}
     h1{font-size:1.3rem;}
@@ -43,31 +55,50 @@
 
 <div class="panel">
   <h1>صفحه پروفایل</h1>
-  <p id="user-info">در حال بارگذاری...</p>
+  <p id="welcome-msg">در حال بارگذاری...</p>
+
+  <label for="name">نام:</label>
+  <input type="text" id="name" placeholder="نام خود را وارد کنید">
+
+  <label for="phone">شماره همراه:</label>
+  <input type="text" id="phone" placeholder="شماره همراه خود را وارد کنید">
+
+  <label for="edition">انتخاب ادیشن:</label>
+  <select id="edition">
+    <option value="">-- انتخاب کنید --</option>
+    <option value="Java">Java</option>
+    <option value="Bedrock">Bedrock</option>
+  </select>
+
+  <button onclick="saveProfile()">ذخیره تغییرات</button>
 </div>
 
 <script>
+  // دریافت نام کاربری از query string
   const params = new URLSearchParams(window.location.search);
   const user = params.get('user') || "کاربر ناشناس";
 
-  // نمایش متن اختصاصی برای همه یوزرها بدون اینکه عمومی نشه
-  const display = document.getElementById('user-info');
-
+  const welcome = document.getElementById('welcome-msg');
   switch(user){
-    case "AMIR 9":
-      display.textContent = "خوش آمدید، AMIR 9! اینجا صفحه تغییرات پروفایل شماست.";
-      break;
-    case "its_peyrov":
-      display.textContent = "خوش آمدید، its_peyrov! اینجا صفحه تغییرات پروفایل شماست.";
-      break;
-    case "dmemz":
-      display.textContent = "خوش آمدید، Dmemz! اینجا صفحه تغییرات پروفایل شماست.";
-      break;
-    case "example_player":
-      display.textContent = "خوش آمدید، Alireza! اینجا صفحه تغییرات پروفایل شماست.";
-      break;
-    default:
-      display.textContent = "کاربر ناشناس!";
+    case "AMIR 9": welcome.textContent = "خوش آمدید، AMIR 9!"; break;
+    case "its_peyrov": welcome.textContent = "خوش آمدید، its_peyrov!"; break;
+    case "dmemz": welcome.textContent = "خوش آمدید، Dmemz!"; break;
+    case "example_player": welcome.textContent = "خوش آمدید، Alireza!"; break;
+    default: welcome.textContent = "کاربر ناشناس!"; 
+  }
+
+  function saveProfile(){
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const edition = document.getElementById('edition').value;
+
+    if(!name || !phone || !edition){
+      alert("لطفاً همه فیلدها را پر کنید!");
+      return;
+    }
+
+    alert(`اطلاعات ذخیره شد:\nنام: ${name}\nشماره: ${phone}\nادیشن: ${edition}`);
+    // میشه اینجا کد ذخیره‌سازی به سرور یا localStorage اضافه کرد
   }
 </script>
 
