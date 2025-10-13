@@ -3,75 +3,148 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>انتخاب ادیشن و نسخه</title>
+  <title>پروفایل ماینکرفت</title>
 
-  <!-- فونت وزیر -->
-  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet" type="text/css" />
+  <!-- آیکون ماینکرفت -->
+  <link rel="icon" type="image/png" href="https://www.minecraft.net/etc.clientlibs/minecraft/clientlibs/main/resources/favicon.ico">
 
   <style>
-    body {
-      font-family: "Vazir", sans-serif;
-      direction: rtl;
-      background-color: #121212;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
+  @font-face {
+    font-family: 'Vazirmatn';
+    src: url('fonts/Vazirmatn-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
 
-    .container {
-      background: #1e1e1e;
-      border-radius: 20px;
-      padding: 30px;
-      text-align: center;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-    }
+  body {
+    font-family: 'Vazirmatn', sans-serif;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0b0f16;
+    color: #fff;
+  }
 
-    select, input {
-      width: 100%;
-      padding: 10px;
-      margin-top: 15px;
-      border-radius: 10px;
-      border: none;
-      font-size: 16px;
-      text-align: center;
-      background: #2c2c2c;
-      color: white;
-      font-family: "Vazir", sans-serif;
-    }
+  .card {
+    background: rgba(0,0,0,0.7);
+    padding: 20px;
+    border-radius: 12px;
+    width: 350px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  }
 
-    h1 {
-      font-size: 22px;
-      margin-bottom: 20px;
-    }
+  h2 {
+    text-align: center;
+    margin-bottom: 12px;
+  }
 
-    label {
-      display: block;
-      margin-top: 10px;
-      font-size: 16px;
-    }
+  label {
+    display: block;
+    margin-top: 10px;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    border-radius: 6px;
+    border: 1px solid #2b8cff;
+    background: #071a2a;
+    color: #e6f3ff;
+    font-family: 'Vazirmatn', sans-serif;
+  }
+
+  button {
+    margin-top: 12px;
+    width: 100%;
+    padding: 10px;
+    background: #2b8cff;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Vazirmatn', sans-serif;
+  }
+
+  button:hover {
+    background: #1a6ad1;
+  }
+
+  .note {
+    font-size: 13px;
+    color: #bad4f0aa;
+    margin-bottom: 8px;
+  }
   </style>
 </head>
+
 <body>
-
-  <div class="container">
-    <h1>انتخاب ادیشن و نسخه</h1>
-
-    <label for="edition">ادیشن:</label>
-    <select id="edition">
-      <option value="bedrock">Bedrock Edition</option>
-      <option value="java">Java Edition</option>
-    </select>
-
-    <label for="version">نسخه:</label>
-    <input id="version" type="text" placeholder="مثلاً 1.21.30 یا 1.20.4" />
-
+<div class="card">
+  <h2>تغییرات پروفایل</h2>
+  <div class="note">
+    برای وارد کردن آپارات یوزرنیم وارد آپارات خود شوید و نام کانال خود را وارد نمایید.
   </div>
 
+  <label>آپارات یوزرنیم</label>
+  <input type="text" id="username" placeholder="مثال: example_player">
+  <button onclick="login()">ورود</button>
+
+  <div id="profileForm" style="display:none;">
+    <label>نام</label>
+    <input type="text" id="name">
+
+    <label>شماره همراه</label>
+    <input type="text" id="phone">
+
+    <label>ادیشن</label>
+    <select id="edition">
+      <option value="Java">Java</option>
+      <option value="Bedrock">Bedrock</option>
+    </select>
+
+    <label>نسخه</label>
+    <input type="text" id="version" placeholder="مثلاً 1.21.30 یا 1.20.4">
+
+    <button onclick="saveProfile()">ذخیره تغییرات</button>
+  </div>
+</div>
+
+<script>
+const allowedUsers = ["example_player","AMIR 9","its_peyrov","dmemz","horam_2016"];
+
+function login() {
+  const username = document.getElementById("username").value.trim();
+  if(!allowedUsers.includes(username)) {
+    alert("این یوزرنیم مجاز نیست!");
+    return;
+  }
+
+  document.getElementById("profileForm").style.display = "block";
+
+  if(username === "AMIR 9") {
+    document.getElementById("name").value = "امیر سلامی";
+    document.getElementById("phone").value = "09369330357";
+    document.getElementById("edition").value = "Bedrock";
+    document.getElementById("version").value = "1.21.100";
+  } else if(username === "example_player") {
+    document.getElementById("name").value = "Example Player";
+    document.getElementById("phone").value = "09123456789";
+    document.getElementById("edition").value = "Java";
+    document.getElementById("version").value = "1.21.8";
+  } else {
+    document.getElementById("name").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("edition").value = "Java";
+    document.getElementById("version").value = "";
+  }
+}
+
+function saveProfile() {
+  alert("تغییرات ذخیره شد! (این نسخه فقط نمایش داده می‌شود)");
+}
+</script>
 </body>
 </html>
