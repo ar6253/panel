@@ -45,6 +45,7 @@
     cursor:pointer;
   }
   button:active{ transform:translateY(1px); }
+  #save-msg { color:green; margin-top:10px; display:none; font-weight:bold; }
   @media(max-width:480px){
     .panel{padding:20px;}
     h1{font-size:1.3rem;}
@@ -70,7 +71,8 @@
     <option value="Bedrock">Bedrock</option>
   </select>
 
-  <button onclick="saveProfile()">ذخیره تغییرات</button>
+  <button id="saveBtn">ذخیره تغییرات</button>
+  <p id="save-msg">اطلاعات با موفقیت ذخیره شد!</p>
 </div>
 
 <script>
@@ -90,6 +92,8 @@
   const nameInput = document.getElementById('name');
   const phoneInput = document.getElementById('phone');
   const editionSelect = document.getElementById('edition');
+  const saveBtn = document.getElementById('saveBtn');
+  const saveMsg = document.getElementById('save-msg');
 
   // بارگذاری اطلاعات ذخیره شده از localStorage
   const savedData = JSON.parse(localStorage.getItem(`profile_${user}`));
@@ -111,36 +115,17 @@
 
     // ذخیره در localStorage با کلید اختصاصی هر یوزر
     localStorage.setItem(`profile_${user}`, JSON.stringify({name, phone, edition}));
-    alert(`اطلاعات ذخیره شد:\nنام: ${name}\nشماره: ${phone}\nادیشن: ${edition}`);
-  }
-</script>
 
-</body>
-</html>
-<button id="saveBtn">ذخیره تغییرات</button>
-<p id="save-msg" style="color:green;margin-top:10px;display:none;">اطلاعات با موفقیت ذخیره شد!</p>
-
-<script>
-  const saveBtn = document.getElementById('saveBtn');
-  const saveMsg = document.getElementById('save-msg');
-
-  function saveProfile(){
-    const name = nameInput.value.trim();
-    const phone = phoneInput.value.trim();
-    const edition = editionSelect.value;
-
-    if(!name || !phone || !edition){
-      alert("لطفاً همه فیلدها را پر کنید!");
-      return;
-    }
-
-    localStorage.setItem(`profile_${user}`, JSON.stringify({name, phone, edition}));
     // نمایش پیام موفقیت
     saveMsg.style.display = "block";
     saveMsg.textContent = "اطلاعات با موفقیت ذخیره شد!";
+
     // پیام بعد از 3 ثانیه ناپدید شود
     setTimeout(() => { saveMsg.style.display = "none"; }, 3000);
   }
 
   saveBtn.addEventListener('click', saveProfile);
 </script>
+
+</body>
+</html>
