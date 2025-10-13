@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>پنل کاربری</title>
+<title>ورود به پنل</title>
 <style>
-  /* ریست اولیه */
   * {
     margin: 0;
     padding: 0;
@@ -44,6 +43,7 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 1rem;
+    text-align: center;
   }
 
   .panel button {
@@ -77,10 +77,27 @@
 
 <div class="panel">
   <h1>ورود به پنل</h1>
-  <input type="text" placeholder="نام کاربری">
-  <input type="password" placeholder="رمز عبور">
-  <button>ورود</button>
+  <input type="text" id="username" placeholder="نام کاربری را وارد کنید">
+  <button onclick="login()">ورود</button>
 </div>
+
+<script>
+  function login() {
+    const user = document.getElementById('username').value.trim();
+
+    if (user === "AMIR 9") {
+      window.location.href = "https://ar6253.github.io/panel/profile.html?user=AMIR%209";
+    } else if (user === "its_peyrov") {
+      window.location.href = "https://ar6253.github.io/panel/profile.html?user=its_peyrov";
+    } else if (user === "Dmemz") {
+      window.location.href = "https://ar6253.github.io/panel/profile.html?user=dmemz";
+    } else if (user === "Alireza") {
+      window.location.href = "https://ar6253.github.io/panel/profile.html?user=example_player";
+    } else {
+      alert("نام کاربری یافت نشد!");
+    }
+  }
+</script>
 
 </body>
 </html>
