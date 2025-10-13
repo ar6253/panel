@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>پروفایل ماینکرفت</title>
 
-<!-- ✅ آیکون گرس ماینکرفت (Grass Block) -->
+<!-- ✅ آیکون گرس ماینکرفت -->
 <link rel="icon" type="image/png" href="https://www.minecraft.net/etc.clientlibs/minecraft/clientlibs/main/resources/favicon.ico">
 
 <!-- ✅ فونت وزیرمتن -->
@@ -21,12 +21,9 @@ body {
   background: #0b0f16;
   color: #fff;
 }
-
-/* اطمینان از اینکه همه چیز فونت وزیرمتن دارد */
 *, input, select, button {
   font-family: "Vazirmatn", sans-serif !important;
 }
-
 .card {
   background: rgba(0,0,0,0.7);
   padding: 20px;
@@ -71,7 +68,7 @@ button:hover { background:#1a6ad1; }
     <input type="text" id="phone">
 
     <label>ادیشن</label>
-    <select id="edition">
+    <select id="edition" onchange="updateVersion()">
       <option value="Java">Java</option>
       <option value="Bedrock">Bedrock</option>
     </select>
@@ -108,7 +105,18 @@ function login() {
     document.getElementById("name").value = "";
     document.getElementById("phone").value = "";
     document.getElementById("edition").value = "Java";
-    document.getElementById("version").value = "";
+    document.getElementById("version").value = "1.21.8";
+  }
+}
+
+function updateVersion() {
+  const edition = document.getElementById("edition").value;
+  const versionInput = document.getElementById("version");
+
+  if (edition === "Bedrock") {
+    versionInput.value = "1.21.100";
+  } else if (edition === "Java") {
+    versionInput.value = "1.21.8";
   }
 }
 
