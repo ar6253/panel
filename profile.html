@@ -87,18 +87,31 @@
     default: welcome.textContent = "کاربر ناشناس!"; 
   }
 
+  const nameInput = document.getElementById('name');
+  const phoneInput = document.getElementById('phone');
+  const editionSelect = document.getElementById('edition');
+
+  // بارگذاری اطلاعات ذخیره شده از localStorage
+  const savedData = JSON.parse(localStorage.getItem(`profile_${user}`));
+  if(savedData){
+    nameInput.value = savedData.name || "";
+    phoneInput.value = savedData.phone || "";
+    editionSelect.value = savedData.edition || "";
+  }
+
   function saveProfile(){
-    const name = document.getElementById('name').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const edition = document.getElementById('edition').value;
+    const name = nameInput.value.trim();
+    const phone = phoneInput.value.trim();
+    const edition = editionSelect.value;
 
     if(!name || !phone || !edition){
       alert("لطفاً همه فیلدها را پر کنید!");
       return;
     }
 
+    // ذخیره در localStorage با کلید اختصاصی هر یوزر
+    localStorage.setItem(`profile_${user}`, JSON.stringify({name, phone, edition}));
     alert(`اطلاعات ذخیره شد:\nنام: ${name}\nشماره: ${phone}\nادیشن: ${edition}`);
-    // میشه اینجا کد ذخیره‌سازی به سرور یا localStorage اضافه کرد
   }
 </script>
 
