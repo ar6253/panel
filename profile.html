@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تغییرات پروفایل</title>
+  <link rel="icon" type="image/png" href="https://www.minecraft.net/etc.clientlibs/minecraft/clientlibs/main/resources/favicon.ico">
+
+  <style>
+    @font-face {
+      font-family: 'Vazirmatn';
+      src: url('fonts/Vazirmatn-Regular.woff2') format('woff2');
+    }
+
+    body {
+      font-family: 'Vazirmatn', sans-serif;
+      background: #0b0f16;
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      background: rgba(0,0,0,0.7);
+      padding: 20px;
+      border-radius: 12px;
+      width: 350px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 6px;
+      border-radius: 6px;
+      border: 1px solid #2b8cff;
+      background: #071a2a;
+      color: #e6f3ff;
+      font-family: 'Vazirmatn', sans-serif;
+    }
+
+    button {
+      margin-top: 12px;
+      width: 100%;
+      padding: 10px;
+      background: #2b8cff;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1a6ad1;
+    }
+
+    h2 {text-align:center;margin-bottom:12px;}
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h2>تغییرات پروفایل</h2>
+
+    <label>نام</label>
+    <input type="text" id="name">
+
+    <label>شماره همراه</label>
+    <input type="text" id="phone">
+
+    <label>ادیشن</label>
+    <select id="edition">
+      <option value="Java">Java</option>
+      <option value="Bedrock">Bedrock</option>
+    </select>
+
+    <label>نسخه</label>
+    <input type="text" id="version" placeholder="مثلاً 1.21.30 یا 1.20.4">
+
+    <button onclick="saveProfile()">ذخیره تغییرات</button>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const user = params.get("user");
+
+    // داده‌ها
+    const users = {
+      "AMIR 9": {
+        name: "امیر سلامی",
+        phone: "09369330357",
+        edition: "Bedrock",
+        version: "1.21.100"
+      },
+      "example_player": {
+        name: "Example Player",
+        phone: "09123456789",
+        edition: "Java",
+        version: "1.21.8"
+      }
+    };
+
+    // پر کردن فرم
+    if (users[user]) {
+      const u = users[user];
+      document.getElementById("name").value = u.name;
+      document.getElementById("phone").value = u.phone;
+      document.getElementById("edition").value = u.edition;
+      document.getElementById("version").value = u.version;
+    }
+
+    function saveProfile() {
+      alert("تغییرات ذخیره شد! (نسخه‌ی نمایشی)");
+    }
+  </script>
+</body>
+</html>
