@@ -1,133 +1,237 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>پروفایل کاربر</title>
-  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn/Vazirmatn-font-face.css" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ورود به پروفایل</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: #fff;
-      font-family: "Vazirmatn", sans-serif;
+      font-family: 'Vazirmatn', sans-serif;
+      background: linear-gradient(to bottom right, #8ec5fc, #e0c3fc);
+      height: 100vh;
+      margin: 0;
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
-      height: 100vh;
-      margin: 0;
-      color: #333;
     }
-    h1 {
-      margin-bottom: 25px;
-      font-size: 24px;
-      font-weight: bold;
-    }
-    .profile-box {
-      background: #f9f9f9;
-      border-radius: 16px;
-      padding: 25px 35px;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 320px;
       text-align: center;
       position: relative;
     }
-    input, select, button {
+
+    h2 {
+      color: #333;
+      margin-bottom: 18px;
+      font-size: 20px;
+      margin-top: 0;
+    }
+
+    label {
+      display: block;
+      text-align: right;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #333;
+      font-size: 14px;
+    }
+
+    input, select {
       width: 100%;
       padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
-      outline: none;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      margin-bottom: 14px;
+      font-size: 14px;
+      box-sizing: border-box;
       text-align: center;
-      font-family: "Vazirmatn", sans-serif;
     }
+
     button {
-      background-color: #007bff;
+      background-color: #5b5fc7;
       color: white;
       border: none;
+      padding: 10px 15px;
+      border-radius: 10px;
       cursor: pointer;
-      transition: 0.3s;
-      font-weight: bold;
+      font-size: 16px;
+      width: 100%;
     }
+
     button:hover {
-      background-color: #0056b3;
+      background-color: #4a4ebd;
     }
-    #save-msg {
-      color: green;
-      margin-top: 10px;
-      display: none;
-    }
-    .back-btn {
+
+    .back-button {
       position: absolute;
-      top: -50px;
-      left: 0;
-      background: #e5e5e5;
+      top: 12px;
+      left: 12px; /* left because dir=rtl shows it visually top-right */
+      background-color: #ccc;
       color: #333;
       padding: 6px 10px;
+      border: none;
       border-radius: 8px;
-      text-decoration: none;
-      font-size: 14px;
-      transition: 0.3s;
+      cursor: pointer;
+      font-size: 13px;
     }
-    .back-btn:hover {
-      background: #ccc;
+
+    .hidden {
+      display: none;
+    }
+
+    p.description {
+      text-align: right;
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 10px;
+      margin-top: 0;
+    }
+
+    .success {
+      color: #0a8f3c;
+      font-weight: 600;
+      margin-top: 8px;
+      display: none;
     }
   </style>
 </head>
 <body>
-  <h1>ویرایش پروفایل</h1>
-  <div class="profile-box">
-    <a href="https://ar6253.github.io/panel/" class="back-btn">بازگشت</a>
 
-    <input type="text" id="name" placeholder="نام">
-    <input type="text" id="phone" placeholder="شماره همراه">
+  <!-- صفحه اول -->
+  <div class="container" id="page1">
+    <h2>ورود به پروفایل</h2>
+    <p class="description">لطفاً نام کانال خود را وارد نمایید</p>
+
+    <label>آپارات یوزرنیم</label>
+    <input type="text" id="username" placeholder="مثال: AMIR9" autocomplete="off">
+
+    <button id="goBtn">ادامه</button>
+  </div>
+
+  <!-- صفحه دوم -->
+  <div class="container hidden" id="page2">
+    <button class="back-button" id="backBtn">بازگشت</button>
+    <h2>اطلاعات تکمیلی</h2>
+
+    <label>نام</label>
+    <input type="text" id="name" placeholder="نام شما">
+
+    <label>شماره همراه</label>
+    <input type="text" id="phone" placeholder="09xxxxxxxxx">
+
+    <label>نسخه</label>
+    <input type="text" id="version" placeholder="مثلاً 1.0.0">
+
+    <label>ادیشن</label>
     <select id="edition">
-      <option value="">انتخاب ادیشن</option>
-      <option value="Java">Java</option>
+      <option value="">انتخاب کنید</option>
       <option value="Bedrock">Bedrock</option>
+      <option value="Java">Java</option>
     </select>
-    <input type="text" id="version" placeholder="نسخه">
-    <button id="saveBtn">ذخیره تغییرات</button>
-    <p id="save-msg">✅ اطلاعات با موفقیت ذخیره شد</p>
+
+    <button id="saveBtn">ذخیره</button>
+    <div class="success" id="savedNotice">اطلاعات ذخیره شد</div>
   </div>
 
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const user = params.get('user') || "کاربر";
+    // المان‌ها
+    const page1 = document.getElementById('page1');
+    const page2 = document.getElementById('page2');
+    const goBtn = document.getElementById('goBtn');
+    const backBtn = document.getElementById('backBtn');
 
+    const usernameInput = document.getElementById('username');
     const nameInput = document.getElementById('name');
     const phoneInput = document.getElementById('phone');
-    const editionSelect = document.getElementById('edition');
     const versionInput = document.getElementById('version');
+    const editionSelect = document.getElementById('edition');
     const saveBtn = document.getElementById('saveBtn');
-    const saveMsg = document.getElementById('save-msg');
+    const savedNotice = document.getElementById('savedNotice');
 
-    // بارگذاری اطلاعات ذخیره‌شده
-    const savedData = JSON.parse(localStorage.getItem(`profile_${user}`));
-    if (savedData) {
-      nameInput.value = savedData.name || "";
-      phoneInput.value = savedData.phone || "";
-      editionSelect.value = savedData.edition || "";
-      versionInput.value = savedData.version || "";
-    }
-
-    // ذخیره اطلاعات جدید
-    saveBtn.addEventListener('click', () => {
-      const name = nameInput.value.trim();
-      const phone = phoneInput.value.trim();
-      const edition = editionSelect.value;
-      const version = versionInput.value.trim();
-
-      if (!name || !phone || !edition || !version) {
-        alert("لطفاً همه فیلدها را پر کنید");
+    // رفتن به صفحه دوم: بررسی username و لود اطلاعات اگر موجود باشه
+    goBtn.addEventListener('click', () => {
+      const username = usernameInput.value.trim();
+      if (!username) {
+        alert('لطفاً نام کانال خود را وارد نمایید');
+        usernameInput.focus();
         return;
       }
 
-      localStorage.setItem(`profile_${user}`, JSON.stringify({ name, phone, edition, version }));
-      saveMsg.style.display = "block";
-      setTimeout(() => saveMsg.style.display = "none", 3000);
+      // نمایش صفحه دوم
+      page1.classList.add('hidden');
+      page2.classList.remove('hidden');
+
+      // بارگذاری اطلاعات قبلی برای این یوزرنیم (کلید ذخیره: profile_<username>)
+      const saved = localStorage.getItem(`profile_${username}`);
+      if (saved) {
+        try {
+          const data = JSON.parse(saved);
+          nameInput.value = data.name || '';
+          phoneInput.value = data.phone || '';
+          versionInput.value = data.version || '';
+          editionSelect.value = data.edition || '';
+        } catch (e) {
+          console.warn('خطا در خواندن داده ذخیره شده', e);
+        }
+      } else {
+        // خالی کن اگر قبلاً چیزی نبود
+        nameInput.value = '';
+        phoneInput.value = '';
+        versionInput.value = '';
+        editionSelect.value = '';
+      }
+    });
+
+    // بازگشت به صفحه اول (نگه داشتن یوزرنیم)
+    backBtn.addEventListener('click', () => {
+      page2.classList.add('hidden');
+      page1.classList.remove('hidden');
+      savedNotice.style.display = 'none';
+    });
+
+    // ذخیره اطلاعات (ذخیره به ازای هر یوزرنیم)
+    saveBtn.addEventListener('click', () => {
+      const username = usernameInput.value.trim();
+      const name = nameInput.value.trim();
+      const phone = phoneInput.value.trim();
+      const version = versionInput.value.trim();
+      const edition = editionSelect.value;
+
+      if (!username) {
+        alert('لطفاً ابتدا آپارات یوزرنیم را در صفحه قبل وارد کنید');
+        return;
+      }
+      if (!name || !phone || !version || !edition) {
+        alert('لطفاً تمام فیلدها را پر کنید');
+        return;
+      }
+
+      const payload = { name, phone, version, edition };
+      localStorage.setItem(`profile_${username}`, JSON.stringify(payload));
+
+      // نمایش پیام موفقیت کوتاه
+      savedNotice.style.display = 'block';
+      setTimeout(() => {
+        savedNotice.style.display = 'none';
+      }, 2500);
+    });
+
+    // امکان فشار Enter برای رفتن به صفحه دوم و ذخیره در فیلدهای مربوطه
+    usernameInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') goBtn.click(); });
+    // در صفحه دوم: Enter روی فیلد نسخه یا ادیشن، ذخیره کنه
+    [nameInput, phoneInput, versionInput, editionSelect].forEach(el => {
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          saveBtn.click();
+        }
+      });
     });
   </script>
 </body>
