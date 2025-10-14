@@ -1,187 +1,133 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>پروفایل کاربر</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ویرایش پروفایل</title>
 
-  <!-- فونت‌ها -->
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    @font-face {
-      font-family: 'Yekan';
-      src: url('https://cdn.fontcdn.ir/Font/Yekan/Yekan.woff2') format('woff2');
-    }
+<style>
+  /* فونت یکان برای input و label ها */
+  @font-face {
+    font-family: 'Yekan';
+    src: url('https://cdn.fontcdn.ir/Font/Yekan/Yekan.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
 
-    body {
-      background-color: #ffffff;
-      font-family: 'Vazirmatn', sans-serif;
-      height: 100vh;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Vazirmatn, sans-serif; /* کل صفحه وزیرمتن */
+  }
 
-    .container {
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      width: 320px;
-      text-align: center;
-      position: relative;
-    }
+  html, body {
+    height: 100%;
+  }
 
-    h2 {
-      font-family: 'Vazirmatn', sans-serif;
-      margin-bottom: 20px;
-      color: #333;
-    }
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    padding: 20px;
+  }
 
-    label {
-      display: block;
-      text-align: right;
-      margin-bottom: 6px;
-      font-weight: 600;
-      color: #333;
-      font-family: 'Vazirmatn', sans-serif;
-      font-size: 14px;
-    }
+  .panel {
+    width: 100%;
+    max-width: 420px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08); /* سبک مثل صفحه اول */
+    text-align: center;
+  }
 
-    input, select {
-      width: 100%;
-      padding: 10px;
-      border: 2px solid #ddd;
-      border-radius: 10px;
-      margin-bottom: 14px;
-      font-size: 14px;
-      box-sizing: border-box;
-      text-align: center;
-      font-family: 'Yekan', sans-serif;
-    }
+  h1 {
+    margin-bottom: 18px;
+    font-size: 1.5rem;
+    color: #222;
+  }
 
-    button {
-      font-family: 'Vazirmatn', sans-serif;
-      background-color: #5b5fc7;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 16px;
-    }
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-family: 'Yekan', sans-serif; /* اسم فیلدها یکان */
+    font-size: 1rem;
+    text-align: right;
+  }
 
-    button:hover {
-      background-color: #4a4ebd;
-    }
+  input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+    margin-bottom: 18px;
+    text-align: center;
+    font-family: 'Yekan', sans-serif; /* متن داخل input یکان */
+  }
 
-    .back-button {
-      position: absolute;
-      top: 12px;
-      left: 12px; /* چون dir=rtl هست در عمل سمت راست دیده میشه */
-      background-color: #ccc;
-      color: #333;
-      padding: 6px 10px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 13px;
-      font-family: 'Vazirmatn', sans-serif;
-    }
+  button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-family: Vazirmatn, sans-serif; /* دکمه‌ها وزیرمتن */
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
 
-    .success {
-      color: #0a8f3c;
-      font-weight: 600;
-      margin-top: 8px;
-      display: none;
-      font-family: 'Vazirmatn', sans-serif;
-    }
-  </style>
+  .save-btn {
+    background: #1976d2; /* آبی */
+    color: #fff;
+  }
+
+  .back-btn {
+    background: #eee; /* خاکستری روشن */
+    color: #222;
+  }
+
+  button:active {
+    transform: translateY(1px);
+  }
+</style>
 </head>
 <body>
 
-  <div class="container">
-    <button class="back-button" id="backBtn">بازگشت</button>
-    <h2>پروفایل کاربر</h2>
+<div class="panel">
+  <h1>ویرایش پروفایل</h1>
 
-    <label>نام</label>
-    <input type="text" id="name" placeholder="نام">
+  <label for="username">نام کاربری</label>
+  <input id="username" type="text" placeholder="نام کاربری" autocomplete="off" />
 
-    <label>شماره همراه</label>
-    <input type="text" id="phone" placeholder="شماره همراه">
+  <label for="email">ایمیل</label>
+  <input id="email" type="email" placeholder="ایمیل" autocomplete="off" />
 
-    <label>نسخه</label>
-    <input type="text" id="version" placeholder="نسخه بازی">
+  <button class="save-btn">ذخیره</button>
+  <button class="back-btn">بازگشت</button>
+</div>
 
-    <label>ادیشن</label>
-    <select id="edition">
-      <option value="">انتخاب کنید</option>
-      <option value="Bedrock">Bedrock</option>
-      <option value="Java">Java</option>
-    </select>
+<script>
+  (function(){
+    const saveBtn = document.querySelector('.save-btn');
+    const backBtn = document.querySelector('.back-btn');
+    const username = document.getElementById('username');
+    const email = document.getElementById('email');
 
-    <button id="saveBtn">ذخیره</button>
-    <div class="success" id="savedNotice">اطلاعات ذخیره شد ✅</div>
-  </div>
-
-  <script>
-    // گرفتن یوزرنیم از URL (مثلاً ?user=AMIR9)
-    const params = new URLSearchParams(window.location.search);
-    const username = params.get('user');
-
-    const nameInput = document.getElementById('name');
-    const phoneInput = document.getElementById('phone');
-    const versionInput = document.getElementById('version');
-    const editionSelect = document.getElementById('edition');
-    const saveBtn = document.getElementById('saveBtn');
-    const savedNotice = document.getElementById('savedNotice');
-    const backBtn = document.getElementById('backBtn');
-
-    // بارگذاری اطلاعات از localStorage
-    if (username) {
-      const saved = localStorage.getItem(`profile_${username}`);
-      if (saved) {
-        try {
-          const data = JSON.parse(saved);
-          nameInput.value = data.name || '';
-          phoneInput.value = data.phone || '';
-          versionInput.value = data.version || '';
-          editionSelect.value = data.edition || '';
-        } catch (e) {
-          console.warn('Error reading profile data:', e);
-        }
-      }
-    }
-
-    // ذخیره تغییرات
     saveBtn.addEventListener('click', () => {
-      if (!username) {
-        alert('خطا: یوزرنیم در لینک مشخص نیست!');
-        return;
-      }
-
-      const name = nameInput.value.trim();
-      const phone = phoneInput.value.trim();
-      const version = versionInput.value.trim();
-      const edition = editionSelect.value;
-
-      if (!name || !phone || !version || !edition) {
-        alert('لطفاً تمام فیلدها را پر کنید');
-        return;
-      }
-
-      const payload = { name, phone, version, edition };
-      localStorage.setItem(`profile_${username}`, JSON.stringify(payload));
-
-      savedNotice.style.display = 'block';
-      setTimeout(() => savedNotice.style.display = 'none', 2500);
+      if(!username.value.trim()){ alert("لطفا نام کاربری را وارد کنید"); username.focus(); return; }
+      if(!email.value.trim()){ alert("لطفا ایمیل را وارد کنید"); email.focus(); return; }
+      alert("اطلاعات ذخیره شد:\n" + username.value + "\n" + email.value);
+      // اینجا می‌تونی کد ذخیره واقعی اضافه کنی
     });
 
-    // دکمه بازگشت
     backBtn.addEventListener('click', () => {
-      window.location.href = "index.html";
+      window.history.back();
     });
-  </script>
+  })();
+</script>
+
 </body>
 </html>
