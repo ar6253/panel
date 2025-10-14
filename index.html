@@ -4,22 +4,78 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ورود به پنل</title>
+
+<!-- فونت یکان برای input -->
+<link href="https://cdn.fontcdn.ir/Font/Persian/Yekan/Yekan.css" rel="stylesheet">
+
 <style>
-  *{box-sizing:border-box;margin:0;padding:0;font-family:Vazirmatn,b yekan;}
-  html,body{height:100%;}
-  body{display:flex;justify-content:center;align-items:center;background:#ffffff;padding:20px;}
-  .panel{width:100%;max-width:420px;background:#fff;padding:30px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.08);text-align:center;}
-  h1{margin-bottom:18px;font-size:1.5rem;color:#222;}
-  input{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;font-size:1rem;margin-bottom:12px;text-align:center;}
-  button{width:100%;padding:12px;border-radius:10px;border:none;background:#1976d2;color:#fff;font-size:1rem;cursor:pointer;}
-  button:active{transform:translateY(1px);}
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Vazirmatn, sans-serif; /* کل صفحه وزیرمتن */
+  }
+
+  html, body {
+    height: 100%;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    padding: 20px;
+  }
+
+  .panel {
+    width: 100%;
+    max-width: 420px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    text-align: center;
+  }
+
+  h1 {
+    margin-bottom: 18px;
+    font-size: 1.5rem;
+    color: #222;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+    margin-bottom: 12px;
+    text-align: center;
+    font-family: 'Yekan', sans-serif; /* فقط متن داخل input یکان شد */
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: #1976d2;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  button:active {
+    transform: translateY(1px);
+  }
 </style>
 </head>
 <body>
 
 <div class="panel">
   <h1>ورود به پنل</h1>
-  <input id="username" type="text" placeholder="نام کانال خود را وارد کنید" autocomplete="off" />
+  <input id="username" type="text" placeholder="نام کانال خود را وارد نمایید" autocomplete="off" />
   <button id="enterBtn">ورود</button>
 </div>
 
@@ -37,12 +93,12 @@
 
     function handleLogin() {
       const raw = input.value.trim();
-      if(!raw){ alert("لطفا نام کاربری را وارد نمایید"); input.focus(); return; }
+      if(!raw){ alert("لطفا نام کانال را وارد نمایید"); input.focus(); return; }
 
       const matchedKey = Object.keys(userLinks).find(k => k.toLowerCase() === raw.toLowerCase());
 
       if(matchedKey){
-        window.location.href = userLinks[matchedKey]; // ریدایرکت به لینک اختصاصی
+        window.location.href = userLinks[matchedKey];
       } else {
         alert("نام کاربری یافت نشد!");
         input.select();
