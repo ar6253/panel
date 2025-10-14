@@ -13,82 +13,71 @@
     font-style: normal;
   }
 
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Vazirmatn, sans-serif;
-  }
+  * { box-sizing: border-box; margin:0; padding:0; font-family: Vazirmatn,sans-serif; }
 
-  html, body { height: 100%; }
+  html, body { height:100%; }
 
   body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #ffffff;
-    padding: 20px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#fff;
+    padding:20px;
   }
 
   .panel {
-    width: 100%;
-    max-width: 420px;
-    background: #fff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-    text-align: center;
+    width:100%;
+    max-width:420px;
+    background:#fff;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.08);
+    text-align:center;
   }
 
-  h1 { margin-bottom: 18px; font-size: 1.5rem; color: #222; }
+  h1 { margin-bottom:18px; font-size:1.5rem; color:#222; }
 
-  label {
-    display: block;
-    margin-bottom: 6px;
-    font-family: 'Yekan', sans-serif;
-    font-size: 1rem;
-    text-align: right;
-  }
+  label { display:block; margin-bottom:6px; font-family:'Yekan',sans-serif; font-size:1rem; text-align:right; }
 
   input, select {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    font-size: 1rem;
-    margin-bottom: 18px;
-    text-align: center;
-    font-family: 'Yekan', sans-serif;
-    appearance: none;
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:1rem;
+    margin-bottom:18px;
+    text-align:center;
+    font-family:'Yekan',sans-serif;
+    appearance:none;
   }
 
   button {
-    width: 100%;
-    padding: 12px;
-    border-radius: 10px;
-    border: none;
-    font-family: Vazirmatn, sans-serif;
-    font-size: 1rem;
-    cursor: pointer;
-    margin-bottom: 10px;
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    border:none;
+    font-family:Vazirmatn,sans-serif;
+    font-size:1rem;
+    cursor:pointer;
+    margin-bottom:10px;
   }
 
-  .save-btn { background: #1976d2; color: #fff; }
-  .back-btn { background: #eee; color: #222; }
+  .save-btn { background:#1976d2; color:#fff; }
+  .back-btn { background:#eee; color:#222; }
 
   .msg {
-    font-family: 'Yekan', sans-serif;
-    font-size: 0.95rem;
-    margin-bottom: 10px;
-    display: none;
-    padding: 8px;
-    border-radius: 8px;
+    font-family:'Yekan',sans-serif;
+    font-size:0.95rem;
+    margin-bottom:10px;
+    display:none;
+    padding:8px;
+    border-radius:8px;
   }
 
-  .msg.error { background: #ffe6e6; color: #d50000; }
-  .msg.success { background: #e6ffe6; color: #1b5e20; }
+  .msg.error { background:#ffe6e6; color:#d50000; }
+  .msg.success { background:#e6ffe6; color:#1b5e20; }
 
-  button:active { transform: translateY(1px); }
+  button:active { transform:translateY(1px); }
 </style>
 </head>
 <body>
@@ -97,6 +86,9 @@
   <h1>ویرایش پروفایل</h1>
 
   <div id="message" class="msg"></div>
+
+  <label for="username">نام کاربری</label>
+  <input id="username" type="text" placeholder="نام کاربری" autocomplete="off" />
 
   <label for="name">نام</label>
   <input id="name" type="text" placeholder="نام" autocomplete="off" />
@@ -121,57 +113,61 @@
 </div>
 
 <script>
-  (function(){
-    const saveBtn = document.querySelector('.save-btn');
-    const backBtn = document.querySelector('.back-btn');
-    const messageDiv = document.getElementById('message');
+(function(){
+  const saveBtn = document.querySelector('.save-btn');
+  const backBtn = document.querySelector('.back-btn');
+  const messageDiv = document.getElementById('message');
 
-    const nameInput = document.getElementById('name');
-    const emailInput = document.getElementById('email');
-    const phoneInput = document.getElementById('phone');
-    const editionSelect = document.getElementById('edition');
-    const versionInput = document.getElementById('version');
+  const usernameInput = document.getElementById('username');
+  const nameInput = document.getElementById('name');
+  const emailInput = document.getElementById('email');
+  const phoneInput = document.getElementById('phone');
+  const editionSelect = document.getElementById('edition');
+  const versionInput = document.getElementById('version');
 
-    // بارگذاری اطلاعات از localStorage در صورت وجود
-    window.addEventListener('load', () => {
-      const data = JSON.parse(localStorage.getItem('profileData') || '{}');
-      if(data.name) nameInput.value = data.name;
-      if(data.email) emailInput.value = data.email;
-      if(data.phone) phoneInput.value = data.phone;
-      if(data.edition) editionSelect.value = data.edition;
-      if(data.version) versionInput.value = data.version;
-    });
+  function showMessage(text, type){
+    messageDiv.textContent = type==='error'?`⚠️ ${text}`:`✅ ${text}`;
+    messageDiv.className='msg '+type;
+    messageDiv.style.display='block';
+    setTimeout(()=>{messageDiv.style.display='none';},12000);
+  }
 
-    function showMessage(text, type) {
-      messageDiv.textContent = type === 'error' ? `⚠️ ${text}` : `✅ ${text}`;
-      messageDiv.className = 'msg ' + type;
-      messageDiv.style.display = 'block';
-      setTimeout(() => { messageDiv.style.display = 'none'; }, 12000); // بعد 12 ثانیه ناپدید شود
+  // بارگذاری اطلاعات وقتی نام کاربری وارد شد
+  usernameInput.addEventListener('change', () => {
+    const username = usernameInput.value.trim();
+    if(!username) return;
+
+    const data = JSON.parse(localStorage.getItem(username) || '{}');
+    nameInput.value = data.name || '';
+    emailInput.value = data.email || '';
+    phoneInput.value = data.phone || '';
+    editionSelect.value = data.edition || 'bedrock';
+    versionInput.value = data.version || '';
+  });
+
+  saveBtn.addEventListener('click', () => {
+    const username = usernameInput.value.trim();
+    if(!username){ showMessage("نام کاربری را وارد کنید", "error"); usernameInput.focus(); return; }
+
+    if(!nameInput.value.trim() || !emailInput.value.trim() || !phoneInput.value.trim() || !versionInput.value.trim()) {
+      showMessage("فیلد ها کامل نیست", "error");
+      return;
     }
 
-    saveBtn.addEventListener('click', () => {
-      if(!nameInput.value.trim() || !emailInput.value.trim() || !phoneInput.value.trim() || !versionInput.value.trim()) {
-        showMessage("فیلد ها کامل نیست", "error");
-        return;
-      }
+    const data = {
+      name: nameInput.value.trim(),
+      email: emailInput.value.trim(),
+      phone: phoneInput.value.trim(),
+      edition: editionSelect.value,
+      version: versionInput.value.trim()
+    };
 
-      // ذخیره در localStorage
-      const data = {
-        name: nameInput.value.trim(),
-        email: emailInput.value.trim(),
-        phone: phoneInput.value.trim(),
-        edition: editionSelect.value,
-        version: versionInput.value.trim()
-      };
-      localStorage.setItem('profileData', JSON.stringify(data));
+    localStorage.setItem(username, JSON.stringify(data));
+    showMessage("اطلاعات با موفقیت ذخیره شد", "success");
+  });
 
-      showMessage("اطلاعات با موفقیت ذخیره شد", "success");
-    });
-
-    backBtn.addEventListener('click', () => {
-      window.history.back();
-    });
-  })();
+  backBtn.addEventListener('click', ()=>{ window.history.back(); });
+})();
 </script>
 
 </body>
