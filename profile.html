@@ -9,11 +9,9 @@
   @font-face {
     font-family: 'Yekan';
     src: url('https://cdn.fontcdn.ir/Font/Yekan/Yekan.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
   }
 
-  * { box-sizing: border-box; margin:0; padding:0; font-family: Vazirmatn,sans-serif; }
+  * { box-sizing:border-box; margin:0; padding:0; font-family: Vazirmatn,sans-serif; }
 
   html, body { height:100%; }
 
@@ -87,9 +85,6 @@
 
   <div id="message" class="msg"></div>
 
-  <label for="username">نام کاربری</label>
-  <input id="username" type="text" placeholder="نام کاربری" autocomplete="off" />
-
   <label for="name">نام</label>
   <input id="name" type="text" placeholder="نام" autocomplete="off" />
 
@@ -118,55 +113,46 @@
   const backBtn = document.querySelector('.back-btn');
   const messageDiv = document.getElementById('message');
 
-  const usernameInput = document.getElementById('username');
   const nameInput = document.getElementById('name');
   const emailInput = document.getElementById('email');
   const phoneInput = document.getElementById('phone');
   const editionSelect = document.getElementById('edition');
   const versionInput = document.getElementById('version');
 
-  function showMessage(text, type){
+  function showMessage(text,type){
     messageDiv.textContent = type==='error'?`⚠️ ${text}`:`✅ ${text}`;
     messageDiv.className='msg '+type;
     messageDiv.style.display='block';
     setTimeout(()=>{messageDiv.style.display='none';},12000);
   }
 
-  // بارگذاری اطلاعات وقتی نام کاربری وارد شد
-  usernameInput.addEventListener('change', () => {
-    const username = usernameInput.value.trim();
-    if(!username) return;
-
-    const data = JSON.parse(localStorage.getItem(username) || '{}');
-    nameInput.value = data.name || '';
-    emailInput.value = data.email || '';
-    phoneInput.value = data.phone || '';
-    editionSelect.value = data.edition || 'bedrock';
-    versionInput.value = data.version || '';
+  // بارگذاری خودکار اطلاعات اگر نام موجود باشد
+  window.addEventListener('load',()=>{
+    const storedUsers = JSON.parse(localStorage.getItem('allUsers')||'{}');
+    // اگر یک نام در لیست موجود باشد، بارگذاری اولینش (یا می‌تونی حذف کنی)
   });
 
-  saveBtn.addEventListener('click', () => {
-    const username = usernameInput.value.trim();
-    if(!username){ showMessage("نام کاربری را وارد کنید", "error"); usernameInput.focus(); return; }
-
-    if(!nameInput.value.trim() || !emailInput.value.trim() || !phoneInput.value.trim() || !versionInput.value.trim()) {
-      showMessage("فیلد ها کامل نیست", "error");
-      return;
+  saveBtn.addEventListener('click',()=>{
+    const username = nameInput.value.trim();
+    if(!username){ showMessage("نام را وارد کنید", "error"); nameInput.focus(); return; }
+    if(!emailInput.value.trim() || !phoneInput.value.trim() || !versionInput.value.trim()){
+      showMessage("فیلد ها کامل نیست","error"); return;
     }
 
-    const data = {
-      name: nameInput.value.trim(),
+    const userData = {
       email: emailInput.value.trim(),
       phone: phoneInput.value.trim(),
       edition: editionSelect.value,
       version: versionInput.value.trim()
     };
 
-    localStorage.setItem(username, JSON.stringify(data));
-    showMessage("اطلاعات با موفقیت ذخیره شد", "success");
+    // ذخیره تو localStorage با کلید نام کاربر
+    localStorage.setItem(username, JSON.stringify(userData));
+
+    showMessage("اطلاعات با موفقیت ذخیره شد","success");
   });
 
-  backBtn.addEventListener('click', ()=>{ window.history.back(); });
+  backBtn.addEventListener('click',()=>{ window.history.back(); });
 })();
 </script>
 
