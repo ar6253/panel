@@ -19,7 +19,7 @@
 
 <div class="panel">
   <h1>ورود به پنل</h1>
-  <input id="username" type="text" placeholder="نام کنال خود را وارد کنید" autocomplete="off" />
+  <input id="username" type="text" placeholder="نام کانال خود را وارد کنید" autocomplete="off" />
   <button id="enterBtn">ورود</button>
 </div>
 
@@ -37,7 +37,7 @@
 
     function handleLogin() {
       const raw = input.value.trim();
-      if(!raw){ alert("لطفاً برای نام کاربری نام ک.انال آپارات خود را وارد کنید."); input.focus(); return; }
+      if(!raw){ alert("لطفا نام کاربری را وارد نمایید"); input.focus(); return; }
 
       const matchedKey = Object.keys(userLinks).find(k => k.toLowerCase() === raw.toLowerCase());
 
