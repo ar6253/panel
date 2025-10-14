@@ -6,7 +6,6 @@
 <title>ویرایش پروفایل</title>
 
 <style>
-  /* فونت یکان برای input و label ها */
   @font-face {
     font-family: 'Yekan';
     src: url('https://cdn.fontcdn.ir/Font/Yekan/Yekan.woff2') format('woff2');
@@ -18,12 +17,10 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Vazirmatn, sans-serif; /* کل صفحه وزیرمتن */
+    font-family: Vazirmatn, sans-serif;
   }
 
-  html, body {
-    height: 100%;
-  }
+  html, body { height: 100%; }
 
   body {
     display: flex;
@@ -39,20 +36,16 @@
     background: #fff;
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.08); /* سبک مثل صفحه اول */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
     text-align: center;
   }
 
-  h1 {
-    margin-bottom: 18px;
-    font-size: 1.5rem;
-    color: #222;
-  }
+  h1 { margin-bottom: 18px; font-size: 1.5rem; color: #222; }
 
   label {
     display: block;
     margin-bottom: 6px;
-    font-family: 'Yekan', sans-serif; /* اسم فیلدها یکان */
+    font-family: 'Yekan', sans-serif;
     font-size: 1rem;
     text-align: right;
   }
@@ -65,8 +58,8 @@
     font-size: 1rem;
     margin-bottom: 18px;
     text-align: center;
-    font-family: 'Yekan', sans-serif; /* متن داخل input و select یکان */
-    appearance: none; /* برای کشویی زیبا */
+    font-family: 'Yekan', sans-serif;
+    appearance: none;
   }
 
   button {
@@ -74,31 +67,36 @@
     padding: 12px;
     border-radius: 10px;
     border: none;
-    font-family: Vazirmatn, sans-serif; /* دکمه‌ها وزیرمتن */
+    font-family: Vazirmatn, sans-serif;
     font-size: 1rem;
     cursor: pointer;
     margin-bottom: 10px;
   }
 
-  .save-btn {
-    background: #1976d2; /* آبی */
-    color: #fff;
+  .save-btn { background: #1976d2; color: #fff; }
+  .back-btn { background: #eee; color: #222; }
+
+  .msg {
+    font-family: 'Yekan', sans-serif;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    display: none;
+    padding: 8px;
+    border-radius: 8px;
   }
 
-  .back-btn {
-    background: #eee; /* خاکستری روشن */
-    color: #222;
-  }
+  .msg.error { background: #ffe6e6; color: #d50000; }
+  .msg.success { background: #e6ffe6; color: #1b5e20; }
 
-  button:active {
-    transform: translateY(1px);
-  }
+  button:active { transform: translateY(1px); }
 </style>
 </head>
 <body>
 
 <div class="panel">
   <h1>ویرایش پروفایل</h1>
+
+  <div id="message" class="msg"></div>
 
   <label for="name">نام</label>
   <input id="name" type="text" placeholder="نام" autocomplete="off" />
@@ -126,23 +124,48 @@
   (function(){
     const saveBtn = document.querySelector('.save-btn');
     const backBtn = document.querySelector('.back-btn');
+    const messageDiv = document.getElementById('message');
+
     const nameInput = document.getElementById('name');
     const emailInput = document.getElementById('email');
     const phoneInput = document.getElementById('phone');
     const editionSelect = document.getElementById('edition');
     const versionInput = document.getElementById('version');
 
+    // بارگذاری اطلاعات از localStorage در صورت وجود
+    window.addEventListener('load', () => {
+      const data = JSON.parse(localStorage.getItem('profileData') || '{}');
+      if(data.name) nameInput.value = data.name;
+      if(data.email) emailInput.value = data.email;
+      if(data.phone) phoneInput.value = data.phone;
+      if(data.edition) editionSelect.value = data.edition;
+      if(data.version) versionInput.value = data.version;
+    });
+
+    function showMessage(text, type) {
+      messageDiv.textContent = type === 'error' ? `⚠️ ${text}` : `✅ ${text}`;
+      messageDiv.className = 'msg ' + type;
+      messageDiv.style.display = 'block';
+      setTimeout(() => { messageDiv.style.display = 'none'; }, 12000); // بعد 12 ثانیه ناپدید شود
+    }
+
     saveBtn.addEventListener('click', () => {
-      if(!nameInput.value.trim()){ alert("لطفا نام را وارد کنید"); nameInput.focus(); return; }
-      if(!emailInput.value.trim()){ alert("لطفا ایمیل را وارد کنید"); emailInput.focus(); return; }
-      if(!phoneInput.value.trim()){ alert("لطفا شماره همراه را وارد کنید"); phoneInput.focus(); return; }
-      if(!versionInput.value.trim()){ alert("لطفا نسخه را وارد کنید"); versionInput.focus(); return; }
-      alert("اطلاعات ذخیره شد:\n" +
-            "نام: " + nameInput.value + "\n" +
-            "ایمیل: " + emailInput.value + "\n" +
-            "شماره: " + phoneInput.value + "\n" +
-            "ادیشن: " + editionSelect.value + "\n" +
-            "نسخه: " + versionInput.value);
+      if(!nameInput.value.trim() || !emailInput.value.trim() || !phoneInput.value.trim() || !versionInput.value.trim()) {
+        showMessage("فیلد ها کامل نیست", "error");
+        return;
+      }
+
+      // ذخیره در localStorage
+      const data = {
+        name: nameInput.value.trim(),
+        email: emailInput.value.trim(),
+        phone: phoneInput.value.trim(),
+        edition: editionSelect.value,
+        version: versionInput.value.trim()
+      };
+      localStorage.setItem('profileData', JSON.stringify(data));
+
+      showMessage("اطلاعات با موفقیت ذخیره شد", "success");
     });
 
     backBtn.addEventListener('click', () => {
