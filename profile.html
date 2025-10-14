@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>پروفایل کاربر</title>
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn/Vazirmatn-font-face.css" rel="stylesheet">
   <style>
     body {
       background-color: #fff;
@@ -19,6 +20,7 @@
     h1 {
       margin-bottom: 25px;
       font-size: 24px;
+      font-weight: bold;
     }
     .profile-box {
       background: #f9f9f9;
@@ -28,6 +30,7 @@
       max-width: 400px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       text-align: center;
+      position: relative;
     }
     input, select, button {
       width: 100%;
@@ -38,6 +41,7 @@
       font-size: 16px;
       outline: none;
       text-align: center;
+      font-family: "Vazirmatn", sans-serif;
     }
     button {
       background-color: #007bff;
@@ -45,6 +49,7 @@
       border: none;
       cursor: pointer;
       transition: 0.3s;
+      font-weight: bold;
     }
     button:hover {
       background-color: #0056b3;
@@ -54,11 +59,28 @@
       margin-top: 10px;
       display: none;
     }
+    .back-btn {
+      position: absolute;
+      top: -50px;
+      left: 0;
+      background: #e5e5e5;
+      color: #333;
+      padding: 6px 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+    .back-btn:hover {
+      background: #ccc;
+    }
   </style>
 </head>
 <body>
   <h1>ویرایش پروفایل</h1>
   <div class="profile-box">
+    <a href="https://ar6253.github.io/panel/" class="back-btn">بازگشت</a>
+
     <input type="text" id="name" placeholder="نام">
     <input type="text" id="phone" placeholder="شماره همراه">
     <select id="edition">
