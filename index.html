@@ -1,15 +1,25 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>ورود به پنل</title>
 
 <style>
-  /* فونت یکان فقط برای input */
+  /* فونت وزیرمتن */
+  @font-face {
+    font-family: 'Vazirmatn';
+    src: url('https://cdn.fontcdn.ir/Font/Vazirmatn/Vazirmatn-Regular.woff2') format('woff2'),
+         url('https://cdn.fontcdn.ir/Font/Vazirmatn/Vazirmatn-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  /* فونت یکان */
   @font-face {
     font-family: 'Yekan';
-    src: url('https://cdn.fontcdn.ir/Font/Yekan/Yekan.woff2') format('woff2');
+    src: url('https://cdn.fontcdn.ir/Font/Yekan/Yekan.woff2') format('woff2'),
+         url('https://cdn.fontcdn.ir/Font/Yekan/Yekan.woff') format('woff');
     font-weight: normal;
     font-style: normal;
   }
@@ -18,18 +28,18 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Vazirmatn, sans-serif; /* کل صفحه وزیرمتن */
+    font-family: 'Vazirmatn', sans-serif; /* پیش‌فرض کل صفحه */
   }
 
   html, body {
     height: 100%;
+    background-color: #ffffff;
   }
 
   body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #ffffff;
     padding: 20px;
   }
 
@@ -47,6 +57,7 @@
     margin-bottom: 18px;
     font-size: 1.5rem;
     color: #222;
+    font-family: 'Vazirmatn', sans-serif;
   }
 
   input {
@@ -57,7 +68,7 @@
     font-size: 1rem;
     margin-bottom: 12px;
     text-align: center;
-    font-family: 'Yekan', sans-serif; /* فقط متن داخل input یکان شد */
+    font-family: 'Yekan', sans-serif; /* فقط داخل input یکان */
   }
 
   button {
@@ -69,6 +80,7 @@
     color: #fff;
     font-size: 1rem;
     cursor: pointer;
+    font-family: 'Vazirmatn', sans-serif;
   }
 
   button:active {
