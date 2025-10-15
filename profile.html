@@ -1,195 +1,179 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>پروفایل کاربر</title>
-
-  <!-- فونت‌ها -->
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&display=swap" rel="stylesheet">
   <style>
     @font-face {
+      font-family: 'Vazirmatn';
+      src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn/Vazirmatn-Regular.woff2') format('woff2');
+    }
+    @font-face {
       font-family: 'Yekan';
-      src: url('https://cdn.fontcdn.ir/Font/Yekan/Yekan.woff2') format('woff2');
+      src: url('https://cdn.jsdelivr.net/gh/rastikerdar/yekan-font/Yekan.woff') format('woff');
     }
 
     body {
-      background-color: #fff;
       font-family: 'Vazirmatn', sans-serif;
-      height: 100vh;
-      margin: 0;
+      background-color: #fff;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-    }
-
-    .container {
-      background: #fff;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      width: 320px;
-      text-align: center;
-      position: relative;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
     }
 
     h2 {
       margin-bottom: 20px;
-      color: #333;
-      font-family: 'Vazirmatn', sans-serif;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      background: #fff;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 400px;
+      text-align: right;
     }
 
     label {
-      display: block;
-      text-align: right;
-      margin-bottom: 6px;
-      font-weight: 600;
-      color: #333;
-      font-family: 'Vazirmatn', sans-serif;
-      font-size: 14px;
+      font-family: 'Vazirmatn';
+      font-weight: bold;
     }
 
     input, select {
-      width: 100%;
+      font-family: 'Yekan';
       padding: 10px;
-      border: 2px solid #ddd;
+      border: 1px solid #ccc;
       border-radius: 10px;
-      margin-bottom: 14px;
-      font-size: 14px;
-      box-sizing: border-box;
-      text-align: center;
-      font-family: 'Yekan', sans-serif;
+      outline: none;
+      font-size: 15px;
     }
 
     button {
-      font-family: 'Vazirmatn', sans-serif;
-      background-color: #5b5fc7;
-      color: white;
+      font-family: 'Vazirmatn';
+      padding: 10px;
       border: none;
-      padding: 10px 15px;
       border-radius: 10px;
+      background: #007BFF;
+      color: white;
       cursor: pointer;
-      font-size: 16px;
-      width: 100%;
+      font-size: 15px;
+      transition: 0.3s;
     }
 
     button:hover {
-      background-color: #4a4ebd;
+      background: #0056b3;
     }
 
-    .back-button {
-      position: absolute;
-      top: 12px;
-      left: 12px; /* در RTL سمت راست دیده میشه */
-      background-color: #ccc;
-      color: #333;
-      padding: 6px 10px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 13px;
-      font-family: 'Vazirmatn', sans-serif;
-    }
-
-    .success {
-      color: #0a8f3c;
-      font-weight: 600;
-      margin-top: 8px;
+    #tableContainer {
       display: none;
-      font-family: 'Vazirmatn', sans-serif;
+      margin-top: 20px;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: right;
+      font-family: 'Yekan';
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    th {
+      background-color: #f5f5f5;
+    }
+
+    #backBtn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: #555;
     }
   </style>
 </head>
 <body>
+  <button id="backBtn" onclick="goBack()">بازگشت</button>
 
-  <div class="container">
-    <button class="back-button" id="backBtn">بازگشت</button>
-    <h2 id="profileTitle">پروفایل کاربر</h2>
+  <h2>پروفایل کاربر</h2>
 
-    <label>نام</label>
-    <input type="text" id="name" placeholder="نام">
+  <form id="profileForm">
+    <div>
+      <label>نام</label>
+      <input type="text" id="name">
+    </div>
+    <div>
+      <label>شماره همراه</label>
+      <input type="tel" id="phone">
+    </div>
+    <div>
+      <label>نسخه</label>
+      <input type="text" id="version">
+    </div>
+    <div>
+      <label>ادیشن</label>
+      <select id="edition">
+        <option value="جاوا">جاوا</option>
+        <option value="بدراک">بدراک</option>
+      </select>
+    </div>
+    <button type="button" onclick="saveData()">ذخیره تغییرات</button>
+  </form>
 
-    <label>ایمیل</label>
-    <input type="email" id="email" placeholder="ایمیل">
-
-    <label>نسخه</label>
-    <input type="text" id="version" placeholder="نسخه بازی">
-
-    <label>ادیشن</label>
-    <select id="edition">
-      <option value="">انتخاب کنید</option>
-      <option value="Bedrock">Bedrock</option>
-      <option value="Java">Java</option>
-    </select>
-
-    <button id="saveBtn">ذخیره</button>
-    <div class="success" id="savedNotice">اطلاعات ذخیره شد ✅</div>
+  <div id="tableContainer">
+    <table>
+      <tr><th>نام</th><td id="t_name"></td></tr>
+      <tr><th>شماره همراه</th><td id="t_phone"></td></tr>
+      <tr><th>نسخه</th><td id="t_version"></td></tr>
+      <tr><th>ادیشن</th><td id="t_edition"></td></tr>
+    </table>
   </div>
 
   <script>
-    // گرفتن یوزرنیم از URL (مثل profile.html?user=Alireza)
-    const params = new URLSearchParams(window.location.search);
-    const username = params.get('user');
-    const title = document.getElementById('profileTitle');
+    const username = new URLSearchParams(window.location.search).get("user");
 
-    // تغییر تیتر بر اساس یوزرنیم
-    if (username) {
-      title.textContent = `پروفایل ${username}`;
+    function goBack() {
+      window.location.href = "https://ar6253.github.io/panel/";
     }
 
-    const nameInput = document.getElementById('name');
-    const emailInput = document.getElementById('email');
-    const versionInput = document.getElementById('version');
-    const editionSelect = document.getElementById('edition');
-    const saveBtn = document.getElementById('saveBtn');
-    const savedNotice = document.getElementById('savedNotice');
-    const backBtn = document.getElementById('backBtn');
+    function saveData() {
+      const data = {
+        name: document.getElementById('name').value,
+        phone: document.getElementById('phone').value,
+        version: document.getElementById('version').value,
+        edition: document.getElementById('edition').value
+      };
+      localStorage.setItem("profile_" + username, JSON.stringify(data));
+      showTable(data);
+    }
 
-    // لود اطلاعات از localStorage برای هر یوزرنیم خاص
-    if (username) {
-      const saved = localStorage.getItem(`profile_${username}`);
+    function showTable(data) {
+      document.getElementById("profileForm").style.display = "none";
+      document.getElementById("tableContainer").style.display = "block";
+      document.getElementById("t_name").textContent = data.name;
+      document.getElementById("t_phone").textContent = data.phone;
+      document.getElementById("t_version").textContent = data.version;
+      document.getElementById("t_edition").textContent = data.edition;
+    }
+
+    // Load saved data
+    window.onload = () => {
+      const saved = localStorage.getItem("profile_" + username);
       if (saved) {
-        try {
-          const data = JSON.parse(saved);
-          nameInput.value = data.name || '';
-          emailInput.value = data.email || '';
-          versionInput.value = data.version || '';
-          editionSelect.value = data.edition || '';
-        } catch (e) {
-          console.warn('Error reading data:', e);
-        }
+        showTable(JSON.parse(saved));
       }
-    }
-
-    // ذخیره اطلاعات در localStorage برای هر کاربر خاص
-    saveBtn.addEventListener('click', () => {
-      if (!username) {
-        alert('خطا: یوزرنیم در لینک مشخص نیست!');
-        return;
-      }
-
-      const name = nameInput.value.trim();
-      const email = emailInput.value.trim();
-      const version = versionInput.value.trim();
-      const edition = editionSelect.value;
-
-      if (!name || !email || !version || !edition) {
-        alert('لطفاً همه فیلدها را پر کنید');
-        return;
-      }
-
-      const data = { name, email, version, edition };
-      localStorage.setItem(`profile_${username}`, JSON.stringify(data));
-
-      savedNotice.style.display = 'block';
-      setTimeout(() => savedNotice.style.display = 'none', 2000);
-    });
-
-    // دکمه بازگشت
-    backBtn.addEventListener('click', () => {
-      window.location.href = "index.html";
-    });
+    };
   </script>
-
 </body>
 </html>
