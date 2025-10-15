@@ -1,147 +1,163 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>اطلاعات کاربر</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>پروفایل کاربر</title>
 
-  <!-- فونت‌ها -->
-  <style>
-    @font-face {
-      font-family: 'Vazirmatn';
-      src: url('Vazirmatn-Regular.ttf');
-    }
-    @font-face {
-      font-family: 'Yekan';
-      src: url('Yekan.ttf');
-    }
+<!-- فونت‌ها -->
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Yekan';
+  src: url('https://cdn.fontcdn.ir/Font/Yekan/Yekan.woff2') format('woff2');
+}
 
-    body {
-      background-color: white;
-      font-family: 'Vazirmatn', sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: start;
-      height: 100vh;
-    }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Vazirmatn', sans-serif;
+}
 
-    .header {
-      width: 100%;
-      display: flex;
-      justify-content: flex-end;
-      padding: 15px;
-    }
+body {
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
 
-    .back-btn {
-      background-color: #ccc;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-family: 'Vazirmatn';
-      cursor: pointer;
-    }
+.container {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  padding: 30px;
+  position: relative;
+  text-align: center;
+}
 
-    h2 {
-      margin-top: 10px;
-      font-size: 20px;
-      font-family: 'Vazirmatn';
-    }
+h2 {
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #222;
+}
 
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      width: 85%;
-      max-width: 400px;
-      margin-top: 10px;
-    }
+label {
+  display: block;
+  text-align: right;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 15px;
+}
 
-    label {
-      font-family: 'Vazirmatn';
-      font-size: 14px;
-    }
+input, select {
+  width: 100%;
+  padding: 12px;
+  border: 1.6px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  text-align: center;
+  font-family: 'Yekan', sans-serif;
+  font-size: 15px;
+}
 
-    input, select {
-      font-family: 'Yekan';
-      padding: 10px;
-      border: 1px solid #aaa;
-      border-radius: 10px;
-      font-size: 15px;
-      outline: none;
-    }
+button.save {
+  width: 100%;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: 'Vazirmatn', sans-serif;
+  transition: background 0.2s ease;
+}
 
-    .save-btn {
-      background-color: #2196F3;
-      color: white;
-      border: none;
-      padding: 10px;
-      border-radius: 10px;
-      font-family: 'Vazirmatn';
-      font-size: 16px;
-      cursor: pointer;
-      width: 100%;
-      margin-top: 10px;
-    }
-  </style>
+button.save:hover {
+  background: #1565c0;
+}
+
+.back-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ccc;
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: 'Vazirmatn', sans-serif;
+}
+</style>
 </head>
 <body>
 
-  <div class="header">
-    <button class="back-btn" onclick="history.back()">بازگشت</button>
-  </div>
-
+<div class="container">
+  <button class="back-button" onclick="history.back()">بازگشت</button>
   <h2>پروفایل کاربر</h2>
 
-  <form id="profileForm">
-    <label>نام</label>
-    <input type="text" id="name" placeholder="نام خود را وارد کنید">
+  <label>نام</label>
+  <input type="text" id="name" placeholder="نام">
 
-    <label>شماره همراه</label>
-    <input type="tel" id="phone" placeholder="مثلاً 09123456789">
+  <label>ایمیل</label>
+  <input type="email" id="email" placeholder="ایمیل">
 
-    <label>نسخه</label>
-    <input type="text" id="version" placeholder="مثلاً 1.21.8">
+  <label>نسخه</label>
+  <input type="text" id="version" placeholder="مثلاً 1.21.8">
 
-    <label>ادیشن</label>
-    <select id="edition">
-      <option value="">انتخاب کنید</option>
-      <option value="Bedrock">بدراک</option>
-      <option value="Java">جاوا</option>
-    </select>
+  <label>ادیشن</label>
+  <select id="edition">
+    <option value="">انتخاب کنید</option>
+    <option value="Bedrock">Bedrock</option>
+    <option value="Java">Java</option>
+  </select>
 
-    <button type="submit" class="save-btn">ذخیره</button>
-  </form>
+  <button class="save" onclick="saveData()">ذخیره</button>
+</div>
 
-  <script>
-    document.getElementById("profileForm").addEventListener("submit", function(e) {
-      e.preventDefault();
+<script>
+function getUsername() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('user') || '';
+}
 
-      const name = document.getElementById("name").value;
-      const phone = document.getElementById("phone").value;
-      const version = document.getElementById("version").value;
-      const edition = document.getElementById("edition").value;
+function saveData() {
+  const username = getUsername();
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const version = document.getElementById('version').value.trim();
+  const edition = document.getElementById('edition').value.trim();
 
-      // ذخیره در localStorage
-      const userData = { name, phone, version, edition };
-      localStorage.setItem("profileData", JSON.stringify(userData));
+  if(!name || !email || !version || !edition){
+    alert('لطفاً همه فیلدها را پر کنید');
+    return;
+  }
 
-      alert("اطلاعات با موفقیت ذخیره شد ✅");
-    });
+  const data = {username, name, email, version, edition};
+  localStorage.setItem(username, JSON.stringify(data));
+  alert('اطلاعات ذخیره شد ✅');
+}
 
-    // بارگذاری اطلاعات ذخیره‌شده
-    window.onload = () => {
-      const savedData = JSON.parse(localStorage.getItem("profileData"));
-      if (savedData) {
-        document.getElementById("name").value = savedData.name;
-        document.getElementById("phone").value = savedData.phone;
-        document.getElementById("version").value = savedData.version;
-        document.getElementById("edition").value = savedData.edition;
-      }
-    };
-  </script>
+// وقتی وارد صفحه می‌شن، اطلاعات قبلی لود میشه
+window.onload = function(){
+  const username = getUsername();
+  const saved = localStorage.getItem(username);
+  if(saved){
+    const data = JSON.parse(saved);
+    document.getElementById('name').value = data.name || '';
+    document.getElementById('email').value = data.email || '';
+    document.getElementById('version').value = data.version || '';
+    document.getElementById('edition').value = data.edition || '';
+  }
+};
+</script>
 
 </body>
 </html>
