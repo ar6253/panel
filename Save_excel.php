@@ -20,7 +20,7 @@ if(!$username || !$name || !$email || !$version || !$edition) {
     echo json_encode(['ok'=>false,'error'=>'missing fields']); exit;
 }
 
-$xlsxFile = __DIR__.'/almass_2.xlsx';
+$xlsxFile = __DIR__.'/copy of Almass_2.xlsx';
 if(file_exists($xlsxFile)){
     $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($xlsxFile);
     $sheet = $spreadsheet->getActiveSheet();
